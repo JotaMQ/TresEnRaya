@@ -107,7 +107,7 @@ def comprobarGanador(carton, turno):
 # dificultad = Dificultad seleccionada por el jugador
 # turnoJugador = Hace referencia al simbolo del jugador, es decir X o O
 # turno = Hace referencia al simbolo de la IA, es decir X o O
-# carton = 
+# carton = Variable dónde se juega la partida
 def dificultadIA(dificultad, turno, turnoJugador, carton):
     time.sleep(1)
 
