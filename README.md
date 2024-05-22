@@ -38,6 +38,13 @@ El programa funciona de la siguiente manera:
 
 8- En caso de que no haya ganador el bucle continuará hasta que un contador cuente 8 vueltas, en ese caso se anunciará el empate y el juego acabará.
 
-🥺 Errores encontrados
+✅ Versiones
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-- A veces cuando uno de los jugadores gana el programa no se da cuenta y no finaliza la parida.
+Última versión: 1.1
+- Se ha arreglado un error por el cual cuando la IA en difícil detectaba que tenia dos casillas marcadas en una linea diagonal intentaba marcar la que quedaba para hacer raya aún que
+  el jugador ya la habia marcado, lo que provocaba que el juego fallara.
+
+- Se ha añadido una opción para salir del juego en el menú principal.
+
+Versión 1.0
+- Versión de salida.

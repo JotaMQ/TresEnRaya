@@ -1,6 +1,7 @@
 import random
 import time
 import os
+import sys
 
 # Función para limpiar la pantalla
 def clear():
@@ -100,12 +101,20 @@ def comprobarGanador(carton, turno):
                 return ganador
 
 # Función para que la IA juegue
+# -----------------------------------------------------
+# Explicación de las variables de la función:
+# -----------------------------------------------------
+# dificultad = Dificultad seleccionada por el jugador
+# turnoJugador = Hace referencia al simbolo del jugador, es decir X o O
+# turno = Hace referencia al simbolo de la IA, es decir X o O
+# carton = 
 def dificultadIA(dificultad, turno, turnoJugador, carton):
     time.sleep(1)
 
     opciones = ["00", "01", "02", "10", "11", "12", "20", "21", "22"]
     opcionAleatoria = random.sample(opciones, len(opciones))
 
+    # Dificultad fácil
     if dificultad == 1:
         # Pinta de manera aleatoría
         for opcion in opcionAleatoria:
@@ -119,6 +128,7 @@ def dificultadIA(dificultad, turno, turnoJugador, carton):
             if not (carton[digitoUno][digitoDos] == "o" or carton[digitoUno][digitoDos] == "x"):
                 return opcion
 
+    # Dificultad difícil
     elif dificultad == 2:
         # Si no hay nada en el centro lo pinta
         if carton[1][1] == " ":
@@ -132,7 +142,6 @@ def dificultadIA(dificultad, turno, turnoJugador, carton):
         verticalPropia = [0, 0, 0]
         
         for iFila, fila in enumerate(carton):
-
             for iElemento, elemento in enumerate(fila):
                 if elemento == turnoJugador:   
                     horizontal[iFila] += 1
@@ -152,6 +161,7 @@ def dificultadIA(dificultad, turno, turnoJugador, carton):
         diagonalDerecha = 0
         diagonalDerechaPropia = 0
 
+        # Diagonal izquierda
         if carton[0][0] == turnoJugador:
             diagonalIzquierda += 1
         if carton[1][1] == turnoJugador:
@@ -160,15 +170,15 @@ def dificultadIA(dificultad, turno, turnoJugador, carton):
             diagonalIzquierda += 1
 
         if carton[0][0] == turno:
-            diagonalIzquierda -= 1
             diagonalIzquierdaPropia += 1
         if carton[1][1] == turno:
-            diagonalIzquierda -= 1
             diagonalIzquierdaPropia += 1
         if carton[2][2] == turno:
-            diagonalIzquierda -= 1
             diagonalIzquierdaPropia += 1
-            
+        
+        diagonalIzquierdaPropia = diagonalIzquierda - diagonalIzquierdaPropia
+
+        # Diagonal derecha
         if carton[0][2] == turnoJugador:
             diagonalDerecha += 1
         if carton[1][1] == turnoJugador:
@@ -177,14 +187,13 @@ def dificultadIA(dificultad, turno, turnoJugador, carton):
             diagonalDerecha += 1
 
         if carton[0][2] == turno:
-            diagonalDerecha -= 1
             diagonalDerechaPropia += 1
         if carton[1][1] == turno:
-            diagonalDerecha -= 1
             diagonalDerechaPropia += 1
         if carton[2][0] == turno:
-            diagonalDerecha -= 1
             diagonalDerechaPropia += 1
+
+        diagonalDerechaPropia = diagonalDerecha - diagonalDerechaPropia
 
         # Si ve que puede ganar con una raya horizontal actua
         if (horizontalPropia[0] == 2 or horizontalPropia[1] == 2 or horizontalPropia[2] == 2):
@@ -351,6 +360,8 @@ while True:
         print("1 -> 1 vs IA")
         print("2 -> 1 vs 1")
         print("---------------------------------------------------------")
+        print("4 -> Salir del juego")
+        print("---------------------------------------------------------")
         usuario = input("-> ")
 
         turnoJugador = "o"
@@ -401,6 +412,15 @@ while True:
         elif usuario == "2":
             modoJuego = 2
             break
+        
+        elif usuario == "4":
+            clear()
+            
+            print("¿Ya te vas? Adios :(")
+
+            time.sleep(2)
+
+            sys.exit(0)
 
         else:
             clear()
